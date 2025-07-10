@@ -1,0 +1,4 @@
+/home/user/pro/zmqProject/CMakeFiles/main.dir
+/home/user/pro/zmqProject/CMakeFiles/client.dir
+/home/user/pro/zmqProject/CMakeFiles/edit_cache.dir
+/home/user/pro/zmqProject/CMakeFiles/rebuild_cache.dir
