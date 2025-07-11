@@ -88,29 +88,24 @@ int main()
 		socket.recv(request, zmq::recv_flags::none);
 		std::cout << "Received " << request.to_string() << std::endl;
 
-		std::this_thread::sleep_for(1s);
+		//std::this_thread::sleep_for(1s);
 
 		std::cout << "Sending back " << sizeof(students) << std::endl;
 
-		/*{
-			std::ostringstream stream;
-			stream.write(reinterpret_cast<char *>(&students), sizeof(students));
-			zmq::message_t mst(stream.str().c_str(), stream.str().length());
-		}*/
 
-		std::this_thread::sleep_for(1s);
-
+		std::ostringstream studentStringStreamCollection;
 		for(auto & studentData : students)
 		{
-			
-			zmq::message_t message;
-			/*message.rebuild(studentData.firstName+"|"+
-					studentData.lastName+"|"+
-					studentData.bornDate);*/
-
-			socket.send(message, zmq::send_flags::none);
-			std::this_thread::sleep_for(1s);
+			studentStringStreamCollection << studentData.firstName <<"|" <<
+					studentData.lastName << "|" <<
+					studentData.bornDate << "#";
 		}
+		
+		zmq::message_t message(studentStringStreamCollection.str().data(),
+				studentStringStreamCollection.str().size());
+
+		socket.send(message, zmq::send_flags::none);
+			std::this_thread::sleep_for(1s);
 	}
 
 	return 0;
